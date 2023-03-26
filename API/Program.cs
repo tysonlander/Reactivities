@@ -14,14 +14,24 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline. Often refered to as middleware. Things that can do something to the http request on its way in or on its way out
+// Configure the HTTP request pipeline. Order matters here. Often refered to as middleware. Things that can do something to the http request on its way in or on its way out
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
@@ -45,3 +55,7 @@ catch (Exception ex)
 }
 
 app.Run();
+
+
+// Start backend with : dotnet watch --no-hot-reload 
+// Start the frontend: cd into 'client-app' 'nmp start'
