@@ -1,35 +1,31 @@
 import React from 'react';
 // import { Card, Icon, Image } from 'semantic-ui-react';
 import { Button, Card, Image } from 'semantic-ui-react';
-import { Activity } from '../../../app/models/activity';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { useStore } from '../../../app/stores/store';
 
-interface Props {
-    activity: Activity;
-    cancelSelectActivity: () => void;
-    openForm: (id: string) => void;
-}
 
-export default function ActivityDetails({
-    activity,
-    cancelSelectActivity,
-    openForm,
-}: Props) {
+export default function ActivityDetails() {
+    const { activityStore } = useStore();
+    const { selectedActivity: activity, openForm, cancelSelectedActivity } = activityStore;
+
+    if (!activity) return <LoadingComponent />;
     return (
         <Card fluid>
             <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
             <Card.Content>
-                <Card.Header>Matthew</Card.Header>
+                <Card.Header>{activity.title}</Card.Header>
                 <Card.Meta>
                     <span>{activity.date}</span>
                 </Card.Meta>
                 <Card.Description>
-                    Matthew is a musician living in Nashville.
+                    {activity.description}
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button onClick={() => openForm(activity.id)}  basic color="blue" content="Edit" />
+                <Button onClick={() => openForm(activity.id)} basic color="blue" content="Edit" />
                 <Button
-                    onClick={cancelSelectActivity}
+                    onClick={cancelSelectedActivity}
                     basic
                     color="grey"
                     content="Cancel"
