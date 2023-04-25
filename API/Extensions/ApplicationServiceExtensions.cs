@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Activities;
 using Application.Core;
+using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -34,6 +36,8 @@ namespace API.Extensions
             service.AddAutoMapper(typeof(MappingProfiles).Assembly);
             service.AddFluentValidationAutoValidation();
             service.AddValidatorsFromAssemblyContaining<Create>();
+            service.AddHttpContextAccessor();
+            service.AddScoped<IUserAccessor, UserAccessor>(); // this makes these available to be injected into our application handlers
 
             return service;
 
