@@ -12,8 +12,9 @@ namespace Persistence
 
         // If you want to query the entity in your code then the entity needs to have a DbSet
 
-        public DbSet<Activity> Activities { get; set; }
+        public DbSet<Activity> Activities { get; set; } // table names get their names from here
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

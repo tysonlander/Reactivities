@@ -9,7 +9,7 @@ export interface Activity {
   city: string;
   venue: string;
   hostUsername: string;
-  isCancelled: string;
+  isCancelled: boolean;
   isGoing: boolean;
   isHost: boolean;
   host?: Profile;
@@ -17,8 +17,8 @@ export interface Activity {
 }
 
 export class Activity implements Activity {
-  constructor(init?: ActivityFormValues){
-    Object.assign(this, init) // this maps all the values it can from ActivityFormValues -> Activity
+  constructor(init?: ActivityFormValues) {
+    Object.assign(this, init); // this maps all the values it can from ActivityFormValues -> Activity
   }
 }
 
@@ -31,15 +31,15 @@ export class ActivityFormValues {
   city: string = '';
   venue: string = '';
 
-  constructor(activity?: ActivityFormValues){
-    if(activity){
+  constructor(activity?: ActivityFormValues) {
+    if (activity) {
       this.id = activity.id;
-      this.title = activity.title
-      this.category = activity.category
-      this.description = activity.description
-      this.date = activity.date
-      this.venue = activity.venue
-      this.city = activity.city
+      this.title = activity.title;
+      this.category = activity.category;
+      this.description = activity.description;
+      this.date = activity.date;
+      this.venue = activity.venue;
+      this.city = activity.city;
     }
   }
 
