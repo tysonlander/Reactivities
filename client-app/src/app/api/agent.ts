@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { resolve } from 'path';
 import { toast } from 'react-toastify';
 import { Activity, ActivityFormValues } from '../models/activity';
 import { Photo, Profile } from '../models/profile';
@@ -103,6 +102,7 @@ const Profiles = {
     },
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+    update: (profile: Partial<Profile>) => requests.put(`/profiles`, profile),
 
 };
 

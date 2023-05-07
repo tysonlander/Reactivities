@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { Link, NavLink } from 'react-router-dom';
 import { Button, Container, Dropdown, Image, Menu } from 'semantic-ui-react';
-import { text } from 'stream/consumers';
 import { useStore } from '../stores/store';
 
 
