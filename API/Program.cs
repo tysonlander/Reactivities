@@ -1,10 +1,12 @@
 using API.Extensions;
 using API.Middleware;
+using API.SignalR;
 using Application.Activities;
 using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +40,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers(); // this maps the routes in the controllers 
+app.MapHub<ChatHub>("/chat");
 
 // creates a database connect (I think)
 using var scope = app.Services.CreateScope(); // "using" specifies that as soon as this line is executed garbage collect
