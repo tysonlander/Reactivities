@@ -10,9 +10,12 @@ namespace Application.Activities
 {
     public class List
     {
-        public class Query : IRequest<Result<List<ActivityDto>>> { }
+        public class Query : IRequest<Result<PagedList<ActivityDto>>>
+        {
+            public ActivityParams Params { get; set; }
+        }
 
-        public class Handler : IRequestHandler<Query, Result<List<ActivityDto>>>
+        public class Handler : IRequestHandler<Query, Result<PagedList<ActivityDto>>>
         {
 
             private readonly DataContext _context;
@@ -27,19 +30,35 @@ namespace Application.Activities
 
             }
 
-            public async Task<Result<List<ActivityDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<PagedList<ActivityDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 // .Include(a => a.Attendees) // When using projection we do not need to eagerly load our related data
                 // .ThenInclude(u => u.AppUser)
 
-                var activities = await _context.Activities
-                    .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider, new { currentUsername = _userAccessor.GetUsername() })
-                    .ToListAsync(cancellationToken);
+                var query = _context.Activities
+                    .Where(d => d.Date >= request.Params.StartDate)
+                    .OrderBy(d => d.Date)
+                    .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider,
+                     new { currentUsername = _userAccessor.GetUsername() })
+                    .AsQueryable();
+
+                if (request.Params.IsGoing && !request.Params.IsHost)
+                {
+                    query = query.Where(x => x.Attendees.Any(a => a.Username == _userAccessor.GetUsername()));
+                }
+
+                if (request.Params.IsHost && !request.Params.IsGoing)
+                {
+                    query = query.Where(x => x.HostUsername == _userAccessor.GetUsername());
+                }
 
                 // var activitiesToReturn = _mapper.Map<List<ActivityDto>>(activities); // we don't need this because ".ProjectTo" returns "ActivityDto"
 
 
-                return Result<List<ActivityDto>>.Success(activities);
+                return Result<PagedList<ActivityDto>>.Success(
+                    await PagedList<ActivityDto>.CreateAsync(query, request.Params.PageNumber,
+                    request.Params.PageSize)
+                );
             }
         }
     }
