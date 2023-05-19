@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
- // api/profiles
+    // api/profiles
     public class ProfilesController : BaseApiController
     {
         [HttpGet("{username}")]
@@ -21,5 +21,12 @@ namespace API.Controllers
         {
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpGet("{username}/activities")]
+        public async Task<IActionResult> GetUserActivities(string username, string predicate)
+        {
+            return HandleResult(await Mediator.Send(new ListActivities.Query { Username = username, Predicate = predicate }));
+        }
+
     }
 }
