@@ -16,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(opt => {
+builder.Services.AddControllers(opt =>
+{
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     opt.Filters.Add(new AuthorizeFilter(policy));
 });
@@ -38,6 +39,10 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseDefaultFiles();
+app.UseStaticFiles(); // without configuration this defaults to serving up files from wwwroot folder... so set client to build files to this location
+app.MapFallbackToController("Index", "Fallback"); // Falls back to "FallbackController"
 
 app.MapControllers(); // this maps the routes in the controllers 
 app.MapHub<ChatHub>("/chat");
