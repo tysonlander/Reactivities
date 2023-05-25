@@ -26,7 +26,7 @@ export default class CommentStore {
             this.hubConnection.on('LoadComments', (comments: ChatComment[]) => {
                 runInAction(() => {
                     comments.forEach(comment => {
-                        comment.createdAt = new Date(comment.createdAt + 'Z'); // when dates come out of dotnet they don't have the zed
+                        comment.createdAt = new Date(comment.createdAt);
                     });
                     this.comments = comments;
                 });

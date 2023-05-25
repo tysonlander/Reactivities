@@ -12,3 +12,5 @@ Troubleshooting
 
 Docker
 - create docker image for postgres "docker run --name reactivitiesDev -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=secret -p 5435:5432 -d postgres:latest" (I changed to 5435 because 5432 was already in use)
+- build the docker image: "docker build -t {dockeraccountUsername}/reactivities"
+- run the image: "docker run --rm -it -p 8080:80 {dockeraccountUsername}/reactivities"
