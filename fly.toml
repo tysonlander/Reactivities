@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for quiet-rain-939 on 2023-05-24T21:14:12-06:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "quiet-rain-939"
+primary_region = "den"
+
+[build]
+  image = "tysonlander/reactivities:latest"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  Cloudinary__CloudName="dxo1xuqwr"
+  Cloudinary__ApiKey="145264238756748"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
