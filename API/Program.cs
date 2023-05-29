@@ -29,10 +29,32 @@ var app = builder.Build();
 // Configure the HTTP request pipeline. Order matters here. Often refered to as middleware. Things that can do something to the http request on its way in or on its way out
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseXContentTypeOptions(); // prevents mind sniffing of the conent type
+app.UseReferrerPolicy(opt => opt.NoReferrer()); // controll how much information is included when navigating away from our app
+app.UseXXssProtection(opt => opt.EnabledWithBlockMode()); // Cross site scripting protection header
+app.UseXfo(opt => opt.Deny()); // protects against click jacking by not allowing applicaiton to be used in an iframe
+app.UseCsp(opt => opt
+    .BlockAllMixedContent()
+    .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
+    .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+    .FormActions(s => s.Self())
+    .FrameAncestors(s => s.Self())
+    .ImageSources(s => s.Self().CustomSources("blob:", "https://res.cloudinary.com", "https://platform-lookaside.fbsbx.com"))
+    .ScriptSources(s => s.Self())
+); // main defense against cross site scipting // can also run in UseCspReportOnly() to toubleshoot
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
+        await next.Invoke();
+    });
 }
 
 app.UseCors("CorsPolicy");
