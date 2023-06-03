@@ -7,6 +7,7 @@ using Application.Core;
 using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Email;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
@@ -79,6 +80,7 @@ namespace API.Extensions
             service.AddHttpContextAccessor();
             service.AddScoped<IUserAccessor, UserAccessor>(); // this makes these available to be injected into our application handlers
             service.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            service.AddScoped<EmailSender>();
             service.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
             service.AddSignalR();
 

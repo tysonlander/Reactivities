@@ -1,6 +1,8 @@
 Start the backend: cd API, "dotnet watch --no-hot-reload" or 'dotnet run'
 Start the frontend: cd client-app, npm start
 
+
+
 drop the database: "dotnet ef database drop -s API -p Persistence"
  Migration:
 - "dotnet ef migrations add {{giveMigrationName}} -p Persistence -s {{giveProjectName - in this case "API"}}
@@ -8,6 +10,7 @@ drop the database: "dotnet ef database drop -s API -p Persistence"
 
 Troubleshooting
 - run "dotnet restore" if you think you should have access to something but don't
+- port localhost:5000 is the client build version of the app being served from the api and port 3000 unbuilt version
 
 
 Docker
