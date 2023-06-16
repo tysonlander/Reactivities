@@ -3,6 +3,7 @@ using Application.Comments;
 using Application.Profiles;
 using Domain;
 using AutoMapper;
+using Application.Companies;
 
 namespace Application.Core
 {
@@ -40,6 +41,8 @@ namespace Application.Core
                 .ForMember(d => d.Category, o => o.MapFrom(s => s.Activity.Category))
                 .ForMember(d => d.HostUsername, o => o.MapFrom(s =>
                     s.Activity.Attendees.FirstOrDefault(x => x.IsHost).AppUser.UserName));
+            CreateMap<Company, Company>();
+            CreateMap<Company, CompanyDto>();
         }
     }
 }
