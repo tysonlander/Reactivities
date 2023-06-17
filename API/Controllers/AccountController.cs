@@ -18,7 +18,7 @@ namespace API.Controllers
 {
     // [AllowAnonymous] // takes precident over specified differnces in controller
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/account")]
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
@@ -92,7 +92,7 @@ namespace API.Controllers
             // }
             // return BadRequest(result.Errors);
 
-            if(!result.Succeeded) return BadRequest("Problem registering user");
+            if (!result.Succeeded) return BadRequest("Problem registering user");
 
             var origin = Request.Headers["origin"];
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -109,24 +109,26 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost("verifyEmail")]
-        public async Task<IActionResult> VerifyEmail(string token, string email){
+        public async Task<IActionResult> VerifyEmail(string token, string email)
+        {
             var user = await _userManager.FindByEmailAsync(email);
-            if(user == null) return Unauthorized();
+            if (user == null) return Unauthorized();
             var decodedTokenBytes = WebEncoders.Base64UrlDecode(token);
             var decodedToken = Encoding.UTF8.GetString(decodedTokenBytes);
             var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
 
-            if(!result.Succeeded) return BadRequest("Could not verify email address");
+            if (!result.Succeeded) return BadRequest("Could not verify email address");
 
             return Ok("Email confirmed - you can now login");
         }
 
         [AllowAnonymous]
         [HttpGet("resendEmailConfirmationLink")]
-        public async Task<IActionResult> ResendEmailConfirmationLink(string email){
+        public async Task<IActionResult> ResendEmailConfirmationLink(string email)
+        {
 
             var user = await _userManager.FindByEmailAsync(email);
-            if(user == null) return Unauthorized();
+            if (user == null) return Unauthorized();
 
             var origin = Request.Headers["origin"];
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -142,11 +144,12 @@ namespace API.Controllers
 
 
         [Authorize]
-        [HttpGet]
+        [HttpGet] // /api/account
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);
             var user = await _userManager.Users.Include(p => p.Photos)
+            .Include(c => c.Company)
                 .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
 
             await SetRefreshToekn(user); // will give them a new refresh token even when they refresh the browser
@@ -190,13 +193,33 @@ namespace API.Controllers
 
         private UserDto CreateUserObect(AppUser user)
         {
-            return new UserDto
+            var userDto = new UserDto
             {
                 DisplayName = user.DisplayName,
                 Image = user?.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName
             };
+
+            if (user.Company != null)
+            {
+
+                var companyDto = new CompanyDto
+                {
+                    Id = user.Company.Id,
+                    Name = user.Company.Name,
+                    PhoneNumber = user.Company.PhoneNumber,
+                    CreatedAt = user.Company.CreatedAt
+                };
+
+                userDto.Company = companyDto;
+            }
+
+            return userDto;
         }
+
+        
+
+
     }
 }

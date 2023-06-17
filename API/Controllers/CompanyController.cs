@@ -36,6 +36,9 @@ namespace API.Controllers
             company.Id = id;
             return HandleResult(await Mediator.Send(new Update.Command { Company = company }));
         }
+        
+        
+
 
     }
 }

@@ -9,7 +9,11 @@ namespace Domain
     public class AppUser : IdentityUser
     {
         public string DisplayName { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Bio { get; set; }
+        public Company Company { get; set; }
         public ICollection<ActivityAttendee> Activities { get; set; }
 
         public ICollection<Photo> Photos { get; set; }
