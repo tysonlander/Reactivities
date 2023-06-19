@@ -9,13 +9,19 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/Routes';
 import 'react-calendar/dist/Calendar.css';
 import 'react-toastify/dist/ReactToastify.min.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './themes/theme';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <StoreContext.Provider value={store}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RouterProvider router={router} />
+        </ThemeProvider>
     </StoreContext.Provider>
     // <React.StrictMode>
     // </React.StrictMode>

@@ -1,8 +1,9 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import { Button, Header, Label } from "semantic-ui-react";
+import { Header, Label } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
+import Button from '@mui/material/Button';
 
 export default observer(function LoginForm() {
     const { userStore } = useStore();
@@ -19,7 +20,8 @@ export default observer(function LoginForm() {
                     <ErrorMessage name="error"
                         render={() => <Label style={{ marginBottom: 10 }} basic color="red" content={errors.error} />}
                     />
-                    <Button loading={isSubmitting} positive content='Login' type="submit" fluid />
+                    {/* <Button loading={isSubmitting} positive content='Login' type="submit" fluid /> */}
+                    <Button variant="contained" disabled={isSubmitting} fullWidth>MUI Button</Button>
                 </Form>
             )}
 
