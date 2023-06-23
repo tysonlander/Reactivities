@@ -3,7 +3,7 @@ import { SyntheticEvent, useState } from "react";
 import { Button, Card, Grid, Header, Image, Tab } from "semantic-ui-react";
 import PhotoUploadWidget from "../../app/common/imageUpload/PhotoUploadWidget";
 import { Photo, Profile } from "../../app/models/profile";
-import { useStore } from "../../app/stores/store";
+import { useStore } from "stores/store";
 
 interface Props {
     profile: Profile;

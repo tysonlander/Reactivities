@@ -4,7 +4,7 @@ import { Tab, Grid, Header, Card, Image, TabProps } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { UserActivity } from '../../app/models/profile';
 import { format } from 'date-fns';
-import { useStore } from "../../app/stores/store";
+import { useStore } from "stores/store";
 
 const panes = [
     { menuItem: 'Future Events', pane: { key: 'future' } },

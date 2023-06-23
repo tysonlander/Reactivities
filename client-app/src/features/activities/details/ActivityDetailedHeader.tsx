@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Header, Item, Segment, Image, Label } from 'semantic-ui-react';
 import { Activity } from "../../../app/models/activity";
-import { useStore } from '../../../app/stores/store';
+import { useStore } from 'stores/store';
 
 const activityImageStyle = {
     filter: 'brightness(30%)'

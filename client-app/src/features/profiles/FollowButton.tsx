@@ -1,16 +1,16 @@
 import React, { SyntheticEvent } from 'react';
-import {observer} from "mobx-react-lite";
-import {Button, Reveal} from "semantic-ui-react";
-import { useStore } from '../../app/stores/store';
+import { observer } from "mobx-react-lite";
+import { Button, Reveal } from "semantic-ui-react";
+import { useStore } from 'stores/store';
 import { Profile } from '../../app/models/profile';
 
 interface Props {
     profile: Profile;
 }
 
-export default observer(function FollowButton({profile}: Props) {
-    const {profileStore, userStore} = useStore();
-    const {updateFollowing, loading} = profileStore;
+export default observer(function FollowButton({ profile }: Props) {
+    const { profileStore, userStore } = useStore();
+    const { updateFollowing, loading } = profileStore;
 
     if (userStore.user?.username === profile.username) return null;
 
@@ -41,5 +41,5 @@ export default observer(function FollowButton({profile}: Props) {
                 />
             </Reveal.Content>
         </Reveal>
-    )
-})
+    );
+});

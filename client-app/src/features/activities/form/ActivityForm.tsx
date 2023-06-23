@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Header, Segment } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { ActivityFormValues } from '../../../app/models/activity';
-import { useStore } from '../../../app/stores/store';
+import { useStore } from 'stores/store';
 import { v4 as uuid } from 'uuid';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -39,7 +39,7 @@ export default observer(function ActivityForm() {
 
     function handleFormSubmit(activity: ActivityFormValues) {
         if (!activity.id) {
-            let newActivity = {...activity, id: uuid()}
+            let newActivity = { ...activity, id: uuid() };
             createActivity(newActivity).then(() => navigate(`/activities/${activity.id}`));
         } else {
             updateActivity(activity).then(() => navigate(`/activities/${activity.id}`));
@@ -57,7 +57,7 @@ export default observer(function ActivityForm() {
 
     return (
         <Segment clearing>
-            <Header content='Activity Details' sub color='teal'/>
+            <Header content='Activity Details' sub color='teal' />
             <Formik
                 validationSchema={validationSchema}
                 enableReinitialize
@@ -89,7 +89,7 @@ export default observer(function ActivityForm() {
                             dateFormat='MMMM d, yyyy h:mm aa'
 
                         />
-                        <Header content='Location Details' sub color='teal'/>
+                        <Header content='Location Details' sub color='teal' />
                         <MyTextInput
                             placeholder="City"
                             name="city"

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Tab } from "semantic-ui-react";
 import { Profile } from "../../app/models/profile";
-import { useStore } from "../../app/stores/store";
+import { useStore } from "stores/store";
 import ProfileAbout from "./ProfileAbout";
 import ProfileActivites from "./ProfileActivites";
 import ProfileFollowings from "./ProfileFollowings";

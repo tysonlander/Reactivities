@@ -4,24 +4,31 @@ import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import reportWebVitals from './reportWebVitals';
-import { StoreContext, store } from './app/stores/store';
-import { RouterProvider } from 'react-router-dom';
+import { StoreContext, store } from 'stores/store';
+import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import { router } from './app/router/Routes';
 import 'react-calendar/dist/Calendar.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './themes/theme';
+import App from './App';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <StoreContext.Provider value={store}>
-        <ThemeProvider theme={theme}>
+
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+
+        {/* original code */}
+        {/* <ThemeProvider theme={theme}>
             <CssBaseline />
             <RouterProvider router={router} />
-        </ThemeProvider>
+        </ThemeProvider> */}
     </StoreContext.Provider>
     // <React.StrictMode>
     // </React.StrictMode>

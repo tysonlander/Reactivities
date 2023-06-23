@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 // import { Card, Icon, Image } from 'semantic-ui-react';
 import { Grid } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { useStore } from '../../../app/stores/store';
+import { useStore } from 'stores/store';
 import ActivityDetailedChat from './ActivityDetailedChat';
 import ActivityDetailedHeader from './ActivityDetailedHeader';
 import ActivityDetailedSideBar from './ActivityDetailedSideBar';

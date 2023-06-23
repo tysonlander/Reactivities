@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Grid, Loader } from 'semantic-ui-react';
-import { useStore } from '../../../app/stores/store';
+import { useStore } from 'stores/store';
 import ActivityList from './ActivityList';
 import ActivityFilters from './ActivityFilter';
 import { PagingParams } from '../../../app/models/pagination';

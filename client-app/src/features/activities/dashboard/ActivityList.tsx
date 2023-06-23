@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Fragment } from 'react';
 import { Header } from 'semantic-ui-react';
 
-import { useStore } from '../../../app/stores/store';
+import { useStore } from 'stores/store';
 import ActivivityListItem from './ActivityListItem';
 
 

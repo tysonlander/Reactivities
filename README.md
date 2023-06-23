@@ -1,3 +1,9 @@
+FRONT END:
+- cd client-app
+- yarn (running with run "npm i --legacy-peer-deps" package like "typescript" and "notistack" conflicting legacy dependancies weren't as well managed) 
+- yarn start
+
+
 Starting the App:
 Start the backend: cd API, "dotnet watch --no-hot-reload" or 'dotnet run'
 Start the frontend: cd client-app, npm start

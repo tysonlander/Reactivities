@@ -5,7 +5,7 @@ import { Button, Form, Grid, Header, Tab } from "semantic-ui-react";
 import MyTextArea from "../../app/common/form/MyTextArea";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { Profile } from "../../app/models/profile";
-import { useStore } from "../../app/stores/store";
+import { useStore } from "stores/store";
 import * as Yup from 'yup';
 
 interface Props {
