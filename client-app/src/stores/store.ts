@@ -5,7 +5,7 @@ import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
 import ProfileStore from "./profileStore";
 import UserStore from "./userStore";
-import SnackBarStore from "./snackBarStore";
+import SnackbarStore from "./snackbarStore";
 import MenuStore from "./menuStore";
 
 interface Store {
@@ -15,7 +15,7 @@ interface Store {
     modalStore: ModalStore;
     profileStore: ProfileStore;
     commentStore: CommentStore;
-    snackBarStore: SnackBarStore;
+    snackbarStore: SnackbarStore;
     menuStore: MenuStore;
 }
 
@@ -26,7 +26,7 @@ export const store: Store = {
     modalStore: new ModalStore(),
     profileStore: new ProfileStore(),
     commentStore: new CommentStore(),
-    snackBarStore: new SnackBarStore(),
+    snackbarStore: new SnackbarStore(),
     menuStore: new MenuStore()
 
 

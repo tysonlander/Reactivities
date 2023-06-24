@@ -52,9 +52,9 @@ const animation: KeyedObject = {
 // ==============================|| SNACKBAR ||============================== //
 
 export default observer(function Snackbar() {
-    const { snackBarStore } = useStore();
+    const { snackbarStore } = useStore();
     // const snackbar = useSelector((state) => state.snackbar);
-    const { actionButton, anchorOrigin, alert, close, message, open, transition, variant, closeSnackbar } = snackBarStore;
+    const { actionButton, anchorOrigin, alert, close, message, open, transition, variant, closeSnackbar } = snackbarStore;
 
     const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
