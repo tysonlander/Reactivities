@@ -51,7 +51,7 @@ const NavItem = observer(({ item, level }: Props) => {
   }
 
   const Icon = item.icon!;
-  const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : false;
+  const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1.25rem' : '1.35rem' }} /> : false; // started as 1rem when open and 1.25rem when closed
 
   const isSelected = openItem.findIndex((id) => id === item.id) > -1;
 

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // project import
 import { APP_DEFAULT_PATH } from 'config';
-// import useAuth from 'hooks/useAuth';
+import useAuth from 'hooks/useAuth';
 
 // types
 import { GuardProps } from 'types/auth';
@@ -11,8 +11,8 @@ import { GuardProps } from 'types/auth';
 // ==============================|| GUEST GUARD ||============================== //
 
 const GuestGuard = ({ children }: GuardProps) => {
-    //   const { isLoggedIn } = useAuth(); @todo: uncomment this line
-    const isLoggedIn = false;
+    const { isLoggedIn } = useAuth();
+    console.log('GuestGuard isLoggedIn: ', isLoggedIn);
     const navigate = useNavigate();
     const location = useLocation();
 

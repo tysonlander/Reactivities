@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { observer } from "mobx-react-lite";
 
 // material-ui
 import {
@@ -26,16 +27,22 @@ import AnimateButton from 'components/@extended/AnimateButton';
 
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
+import { useStore } from "stores/store";
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 // ============================|| JWT - LOGIN ||============================ //
 
-const AuthLogin = () => {
+const AuthLogin = observer(() => {
   const [checked, setChecked] = React.useState(false);
 
   const { login } = useAuth();
+  const { authStore } = useStore();
+
+  console.log('authStore in authlogin', authStore);
+
+
   const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -51,8 +58,8 @@ const AuthLogin = () => {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: 'bob@test.com',
+          password: 'Pa$$w0rd',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -172,6 +179,6 @@ const AuthLogin = () => {
       </Formik>
     </>
   );
-};
+});
 
 export default AuthLogin;

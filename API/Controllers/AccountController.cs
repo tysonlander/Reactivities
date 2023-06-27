@@ -144,7 +144,7 @@ namespace API.Controllers
 
 
         [Authorize]
-        [HttpGet] // /api/account
+        [HttpGet("me")] // /api/account/me
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
             var loggedInUserEmail = User.FindFirstValue(ClaimTypes.Email);

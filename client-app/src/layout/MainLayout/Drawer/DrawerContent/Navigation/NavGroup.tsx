@@ -153,7 +153,7 @@ const NavGroup = observer(({ item, lastItem, remItems, lastItemId, setSelectedIt
   const itemIcon = currentItem?.icon ? (
     <Icon
       style={{
-        fontSize: 20,
+        fontSize: 30,
         stroke: '1.5',
         color: selectedID === currentItem.id ? theme.palette.primary.main : theme.palette.secondary.dark
       }}
@@ -295,7 +295,7 @@ const NavGroup = observer(({ item, lastItem, remItems, lastItemId, setSelectedIt
           >
             {itemIcon && (
               <ListItemIcon sx={{ minWidth: 28 }}>
-                {currentItem.id === lastItemId ? <DownOutlined style={{ fontSize: 20, stroke: '1.5' }} /> : itemIcon}
+                {currentItem.id === lastItemId ? <DownOutlined style={{ fontSize: 30, stroke: '1.5' }} /> : itemIcon}
               </ListItemIcon>
             )}
             <ListItemText

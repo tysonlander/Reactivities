@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import agent from "../../app/api/agent";
+import agent from "api/agent";
 import useQuery from "../../app/util/hooks";
 import { error } from "console";
 import { Button, Header, Icon, Segment } from "semantic-ui-react";

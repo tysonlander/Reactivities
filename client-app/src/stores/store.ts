@@ -7,6 +7,7 @@ import ProfileStore from "./profileStore";
 import UserStore from "./userStore";
 import SnackbarStore from "./snackbarStore";
 import MenuStore from "./menuStore";
+import AuthStore from "./authStore";
 
 interface Store {
     activityStore: ActivityStore;
@@ -17,6 +18,7 @@ interface Store {
     commentStore: CommentStore;
     snackbarStore: SnackbarStore;
     menuStore: MenuStore;
+    authStore: AuthStore;
 }
 
 export const store: Store = {
@@ -27,8 +29,8 @@ export const store: Store = {
     profileStore: new ProfileStore(),
     commentStore: new CommentStore(),
     snackbarStore: new SnackbarStore(),
-    menuStore: new MenuStore()
-
+    menuStore: new MenuStore(),
+    authStore: new AuthStore(),
 
 };
 

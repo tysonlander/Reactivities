@@ -11,6 +11,7 @@ import { GuardProps } from 'types/auth';
 
 const AuthGuard = ({ children }: GuardProps) => {
   const { isLoggedIn } = useAuth();
+  console.log('AuthGuard isLoggedIn: ', isLoggedIn)
   const navigate = useNavigate();
   const location = useLocation();
 

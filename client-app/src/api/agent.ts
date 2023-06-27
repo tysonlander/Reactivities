@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import { Activity, ActivityFormValues } from '../models/activity';
-import { PaginatedResult } from '../models/pagination';
-import { Photo, Profile, UserActivity } from '../models/profile';
-import { User, UserFormValues } from '../models/user';
-import { router } from '../router/Routes';
+import { Activity, ActivityFormValues } from '../app/models/activity';
+import { PaginatedResult } from '../app/models/pagination';
+import { Photo, Profile, UserActivity } from '../app/models/profile';
+import { User, UserFormValues } from '../app/models/user';
+import { router } from '../app/router/Routes';
 import { store } from 'stores/store';
 
 const sleep = (delay: number) => {
@@ -53,8 +53,10 @@ axios.interceptors.response.use(async (response) => {
             }
             break;
         case 401:
+            console.log('401 in agent.ts');
             if (status === 401 && headers['www-authenticate']?.startsWith('Bearer error="invalid_token"')) {
                 store.userStore.logout();
+                // @todo - this is not working. sub out for MUI toats
                 toast.error('Session expired - please login again');
             }
             break;
@@ -97,7 +99,7 @@ const Activities = {
 };
 
 const Account = {
-    current: () => requests.get<User>('/account'),
+    current: () => requests.get<User>('/account/me'), // @todo - change to /account/me
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
     register: (user: UserFormValues) => requests.post<User>('/account/register', user),
     refreshToken: () => requests.post<User>('/account/refreshToken', {}),

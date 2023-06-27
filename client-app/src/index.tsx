@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import reportWebVitals from './reportWebVitals';
 import { StoreContext, store } from 'stores/store';
 import { BrowserRouter, RouterProvider } from 'react-router-dom';
-import { router } from './app/router/Routes';
+// import { router } from './app/router/Routes';
 import 'react-calendar/dist/Calendar.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import CssBaseline from '@mui/material/CssBaseline';

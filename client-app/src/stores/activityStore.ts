@@ -1,5 +1,5 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
-import agent from "../app/api/agent";
+import agent from "../api/agent";
 import { Activity, ActivityFormValues } from "../app/models/activity";
 import { format } from "date-fns";
 import { store } from "./store";
