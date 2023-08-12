@@ -8,7 +8,7 @@ import StoreRoundedIcon from '@mui/icons-material/StoreRounded';
 
 const internal: NavItemType = {
     id: 'group-applications',
-    title: 'Company',
+    title: 'Service Hub',
     icon: StoreRoundedIcon,
     type: 'group',
     children: [
@@ -22,22 +22,25 @@ const internal: NavItemType = {
         },
         {
             id: 'customer',
-            title: 'Customer',
+            title: 'Companies',
             type: 'collapse',
             icon: StoreRoundedIcon,
             children: [
                 {
-                    id: 'customer-list',
-                    title: 'Customer List',
+                    id: 'create-company',
+                    title: 'Create Company', // this shows up as the menu & page title
                     type: 'item',
-                    url: '/apps/customer/customer-list'
+                    url: '/service-hub/company/create',
+                    breadcrumbs: true // this determines if the bradcrumbs & title is shown
                 },
                 {
-                    id: 'customer-card',
-                    title: 'Customer Card',
+                    id: 'list-company',
+                    title: 'List Companies', // this shows up as the menu & page title
                     type: 'item',
-                    url: '/apps/customer/customer-card'
+                    url: '/service-hub/company/list',
+                    breadcrumbs: true // this determines if the bradcrumbs & title is shown
                 }
+
             ]
         },
 

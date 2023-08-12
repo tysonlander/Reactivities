@@ -15,12 +15,6 @@ namespace API.Controllers
     [Route("api/companies")]
     public class CompanyController : BaseApiController
     {
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> CreateCompany(Company company)
-        {
-            return HandleResult(await Mediator.Send(new Create.Command { Company = company }));
-        }
 
         [AllowAnonymous]
         [HttpGet("{id}")] // @route api/companies/:id
@@ -30,7 +24,14 @@ namespace API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPut("{id}")]  // @route api/companies
+        [HttpPost]
+        public async Task<IActionResult> CreateCompany(Company company)
+        {
+            return HandleResult(await Mediator.Send(new Create.Command { Company = company }));
+        }
+
+        [AllowAnonymous]
+        [HttpPut("{id}")]  // @route api/companies/:id
         public async Task<IActionResult> UpdateCompany(Guid id, Company company)
         {
             company.Id = id;

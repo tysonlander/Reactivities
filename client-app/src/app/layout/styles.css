@@ -2,6 +2,10 @@ body {
     background-color: #eaeaea !important;
 }
 
+html {
+   font-size: 16px; /* Set the base font size to 16 pixels. By default it is 16 but somewhere else in this theme it was set smaller */
+}
+
 .ui.inverted.top.fixed.menu {
     background-image: linear-gradient(
         135deg,

@@ -10,7 +10,10 @@ import { SnackbarProvider } from 'notistack';
 
 // assets
 // import { CheckCircleOutlined, CloseCircleOutlined, InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 
 // custom styles
 const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
@@ -34,13 +37,13 @@ const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
 // ===========================|| SNACKBAR - NOTISTACK ||=========================== //
 
 const Notistack = ({ children }: any) => {
-//   const snackbar = useSelector((state) => state.snackbar); // original code from redux that I think can be refactored to use a store and mobx observer the store
-const snackbar = {
+  //   const snackbar = useSelector((state) => state.snackbar); // original code from redux that I think can be refactored to use a store and mobx observer the store
+  const snackbar = {
     maxStack: 3,
     dense: false,
     iconVariant: 'useemojis'
 
-}
+  };
   const iconSX = { marginRight: 8, fontSize: '1.15rem' };
 
   return (
@@ -50,11 +53,11 @@ const snackbar = {
       iconVariant={
         snackbar.iconVariant === 'useemojis'
           ? {
-              success: <WarningRoundedIcon style={iconSX} />,
-              error: <WarningRoundedIcon style={iconSX} />,
-              warning: <WarningRoundedIcon style={iconSX} />,
-              info: <WarningRoundedIcon style={iconSX} />
-            }
+            success: <CheckCircleOutlineRoundedIcon style={iconSX} />,
+            error: <ErrorOutlineRoundedIcon style={iconSX} />,
+            warning: <WarningRoundedIcon style={iconSX} />,
+            info: <InfoRoundedIcon style={iconSX} />
+          }
           : undefined
       }
       hideIconVariant={snackbar.iconVariant === 'hide' ? true : false}

@@ -6,6 +6,7 @@ import { Photo, Profile, UserActivity } from '../app/models/profile';
 import { User, UserFormValues } from '../app/models/user';
 import { router } from '../app/router/Routes';
 import { store } from 'stores/store';
+import * as companyTypes from 'app/models/company';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -125,10 +126,19 @@ const Profiles = {
     listActivities: (username: string, predicate: string) => requests.get<UserActivity[]>(`/profiles/${username}/activities?predicate=${predicate}`)
 };
 
+const Company = {
+    create: (company: companyTypes.CompanyFormValues) => requests.post('/companies', company),
+    list: () => requests.get('/companies'),
+    details: (id: string) => requests.get<companyTypes.Company>(`/companies/${id}`),
+    update: (company: any) => requests.put(`/companies/${company.id}`, company),
+
+};
+
 const agent = {
     Activities,
     Account,
     Profiles,
+    Company,
 };
 
 export default agent;

@@ -111,6 +111,7 @@ export default function Button(theme: Theme) {
       styleOverrides: {
         root: {
           fontWeight: 400,
+          fontSize: '1rem',
           '&::after': {
             content: '""',
             display: 'block',

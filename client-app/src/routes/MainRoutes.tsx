@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 
+
 // project import
 import MainLayout from 'layout/MainLayout';
 import CommonLayout from 'layout/CommonLayout';
@@ -11,6 +12,10 @@ const MaintenanceError = Loadable(lazy(() => import('pages/maintenance/404')));
 const MaintenanceError500 = Loadable(lazy(() => import('pages/maintenance/500')));
 const MaintenanceUnderConstruction = Loadable(lazy(() => import('pages/maintenance/under-construction')));
 const MaintenanceComingSoon = Loadable(lazy(() => import('pages/maintenance/coming-soon')));
+
+const CreateCompanyPage = Loadable(lazy(() => import('pages/service-hub/CreateCompanyPage')));
+const CompanyDetailsPage = Loadable(lazy(() => import('pages/service-hub/CompanyDetailsPage')));
+const ListCompaniesPage = Loadable(lazy(() => import('pages/service-hub/ListCompaniesPage')));
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
@@ -29,9 +34,20 @@ const MainRoutes = {
       ),
       children: [
         {
-          path: 'sample-page',
-          element: <SamplePage />
+          path: 'service-hub',
+          children: [
+            {
+              path: 'company',
+              children: [
+                { path: 'create', element: <CreateCompanyPage /> },
+                { path: ':companyId', element: <CompanyDetailsPage /> },
+                { path: 'list', element: <ListCompaniesPage /> }
+
+              ]
+            }
+          ]
         }
+
       ]
     },
     {
